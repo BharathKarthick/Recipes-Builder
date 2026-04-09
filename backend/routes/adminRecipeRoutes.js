@@ -10,25 +10,19 @@ const {
   rejectRecipe,
   getPendingRecipes,
   getRecipeStatusSummary,
-  getAllUsers // ✅ Imported properly
+  getAllRecipes
 } = require('../controllers/adminRecipeController');
 
-// Admin routes (protected)
-router.post('/add', verifyToken, adminOnly, addRecipe);
-router.put('/update/:id', verifyToken, adminOnly, updateRecipe);
-router.delete('/delete/:id', verifyToken, adminOnly, deleteRecipe);
+router.post('/add',           verifyToken, adminOnly, addRecipe);
+router.put('/update/:id',     verifyToken, adminOnly, updateRecipe);
+router.delete('/delete/:id',  verifyToken, adminOnly, deleteRecipe);
 
-// ✅ Approval / Rejection
-router.put('/recipe/approve/:id', verifyToken, adminOnly, approveRecipe);
-router.put('/recipe/reject/:id', verifyToken, adminOnly, rejectRecipe);
+router.put('/approve/:id',    verifyToken, adminOnly, approveRecipe);
+router.put('/reject/:id',     verifyToken, adminOnly, rejectRecipe);
 
-// ✅ View pending
-router.get('/pending', verifyToken, adminOnly, getPendingRecipes);
-
-// ✅ Status summary
+router.get('/pending',        verifyToken, adminOnly, getPendingRecipes);
 router.get('/status-summary', verifyToken, adminOnly, getRecipeStatusSummary);
+router.get('/all',            verifyToken, adminOnly, getAllRecipes);
 
-// ✅ Get all users
-router.get('/users', verifyToken, adminOnly, getAllUsers);
 
 module.exports = router;

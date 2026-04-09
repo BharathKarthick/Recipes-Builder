@@ -18,7 +18,8 @@ const recipeSchema = new mongoose.Schema({
   cookTime: Number,
   servings: Number,
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  isApproved: { type: Boolean, default: true } // Admin-created are auto-approved
+
+  isApproved: { type: Boolean, default: false }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Recipe', recipeSchema);

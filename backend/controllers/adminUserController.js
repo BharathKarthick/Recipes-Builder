@@ -1,8 +1,16 @@
-// controllers/adminUserController.js
-
 const User = require('../models/User');
 
-// Promote user to admin
+// ✅ Get all registered users (admin)
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({}, "-password"); // Never expose passwords
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch users", error: err.message });
+  }
+};
+
+// ✅ Promote user to admin
 exports.promoteUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.userId);
@@ -16,7 +24,7 @@ exports.promoteUser = async (req, res) => {
   }
 };
 
-// Demote admin to user
+// ✅ Demote admin to regular user
 exports.demoteUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.userId);
@@ -30,7 +38,7 @@ exports.demoteUser = async (req, res) => {
   }
 };
 
-// Delete user
+// ✅ Delete user
 exports.deleteUser = async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.userId);

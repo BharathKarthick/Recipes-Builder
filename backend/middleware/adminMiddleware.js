@@ -16,7 +16,7 @@ const verifyAdmin = async (req, res, next) => {
       return res.status(403).json({ message: 'Access denied. Admins only.' });
     }
 
-    req.user = user; // Attach user to request for further use
+    req.user = user;
     next();
   } catch (err) {
     return res.status(401).json({ message: 'Invalid token' });

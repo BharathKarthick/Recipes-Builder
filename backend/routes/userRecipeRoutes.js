@@ -3,17 +3,14 @@ const router = express.Router();
 const {
   addUserRecipe,
   getAllApprovedRecipes,
-  getUserProfile // ✅ Add this import
+  getUserProfile,
+  getMySubmittedRecipes
 } = require('../controllers/userRecipeController');
 const verifyToken = require('../middleware/authMiddleware');
 
-// ✅ User submits a recipe (pending approval)
-router.post('/submit', verifyToken, addUserRecipe);
-
-// ✅ Public: get all approved recipes
-router.get('/recipes', getAllApprovedRecipes);
-
-// ✅ Get user profile and approved recipe summary
-router.get('/profile', verifyToken, getUserProfile);
+router.post('/submit',    verifyToken, addUserRecipe);
+router.get('/recipes',    getAllApprovedRecipes);
+router.get('/profile',    verifyToken, getUserProfile);
+router.get('/my-recipes', verifyToken, getMySubmittedRecipes);
 
 module.exports = router;
